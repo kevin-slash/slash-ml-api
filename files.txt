@@ -1,0 +1,9 @@
+/usr/local/lib/python3.6/site-packages/slash-ml-api/__init__.py
+/usr/local/lib/python3.6/site-packages/slash-ml-api/runserver.py
+/usr/local/lib/python3.6/site-packages/slash-ml-api/controllers/__init__.py
+/usr/local/lib/python3.6/site-packages/slash-ml-api/controllers/route.py
+/usr/local/lib/python3.6/site-packages/slash-ml-api/__pycache__/__init__.cpython-36.pyc
+/usr/local/lib/python3.6/site-packages/slash-ml-api/__pycache__/runserver.cpython-36.pyc
+/usr/local/lib/python3.6/site-packages/slash-ml-api/controllers/__pycache__/__init__.cpython-36.pyc
+/usr/local/lib/python3.6/site-packages/slash-ml-api/controllers/__pycache__/route.cpython-36.pyc
+/usr/local/lib/python3.6/site-packages/slash_ml_api-0.0.0-py3.6.egg-info
