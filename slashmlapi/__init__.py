@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+''' # -*- coding: utf-8 -*-
 __version__ = '0.1'
 import os
 from flask import Flask, session
@@ -27,4 +27,4 @@ api_session.init_app(app)
 toolbar = DebugToolbarExtension(app)
 
 #from slashmlapi.controllers import *
-from slashmlapi.controllers import route
+from slashmlapi.controllers import route '''
