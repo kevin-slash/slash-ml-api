@@ -7,6 +7,7 @@ import json
 from flask import request
 from werkzeug.utils import secure_filename
 
+
 class ResultController(object):
     """ Handle request from client
     """
@@ -41,7 +42,13 @@ class ResultController(object):
                 list_algo = json_params['algo']
 
                 #results = MLManager.get_results(path_textfile, list_algo, '')
+                
+                #logging.info('Start ML')
+                #print('Start ML')
+
                 results = MLManager.get_results(path_textfile, list_algo, '')
+
+                #print('End ML')
 
                 return True, results
         else:
@@ -113,10 +120,17 @@ class ResultController(object):
         if request.method == 'POST':
 
             json_params = None
+            params = {}
             try:
-                params = self.request.form.get('params')
-                #params = '{ "algo":["nb", "nn", "dl"],"eval_setteing":"loo"}'
-                json_params = json.loads(params)
+
+                # Temp set params
+                params['algo'] = ['NB', 'NN']
+                params['eval_setting'] = 'loo'
+
+                # Get params from client request
+                #params = self.request.form.get('params')
+                #json_params = json.loads(params)
+                json_params = params
             except ValueError:
                 info['error'] = 'Input string must be text, not bytes'
             else:

@@ -15,6 +15,9 @@ from wtforms import StringField
 from wtforms.validators import DataRequired
 from werkzeug.utils import secure_filename
 
+from flask_cors import CORS, cross_origin
+from datetime import timedelta
+from functools import update_wrapper
 
 #UPLOAD_FOLDER = '/var/www/slashml2/data/dataset/text'
 UPLOAD_FOLDER = '/Users/lion/Documents/py-workspare/slash-ml/data/dataset/text'
@@ -32,15 +35,21 @@ application.config['SECRET_KEY'] = application.secret_key
 
 application.config['SESSION_TYPE'] = 'filesystem'
 
-api_session = Session()
-api_session.init_app(application)
+# Allow authorizartion header
+CORS(application)
+#cors = CORS(application, resources={r"/getresults": {"origins": "http://192.168.2.111:8000"}})
+application.config['CORS_HEADERS'] = 'Content-Type'
 
 toolbar = DebugToolbarExtension(application)
 
-#from slashmlapi.controllers import *
-#from slashmlapi.controllers import route
+@application.route('/')
+def hello():
+    info = {
+        'data': 'Hello world!'
+    }
+    return json.dumps(info)
 
-@application.route('/getresults', methods=['POST'])
+@application.route('/getresults', methods=['GET', 'POST', 'OPTIONS'])
 def execute():
     if request.method == 'POST':
 
@@ -53,9 +62,12 @@ def execute():
         return json.dumps(info)
 
     else:
-        return 'KO'
+        info = {
+            'error': 'KO'
+        }
+        return json.dumps(info)
 
 if __name__ == '__main__':
-    #port = int(os.environ.get("PORT", 8080))
-    #application.run('0.0.0.0', port=port)
+    #port = int(os.environ.get("PORT", 5000))
+    #application.run('192.168.2.119', port=port)
     application.run(host='0.0.0.0')
