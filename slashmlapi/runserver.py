@@ -6,8 +6,8 @@
 __version__ = '0.1'
 import os
 import json
-from flask import Flask, session
-from flask_debugtoolbar import DebugToolbarExtension
+from flask import Flask, session, g
+#from flask_debugtoolbar import DebugToolbarExtension
 from flask_session import Session
 from flask import render_template, request, redirect, session, make_response
 from flask_wtf import FlaskForm
@@ -18,16 +18,23 @@ from werkzeug.utils import secure_filename
 from flask_cors import CORS, cross_origin
 from datetime import timedelta
 from functools import update_wrapper
+import time
 
-#UPLOAD_FOLDER = '/var/www/slashml2/data/dataset/text'
-UPLOAD_FOLDER = '/Users/lion/Documents/py-workspare/slash-ml/data/dataset/text'
+import logging
+
+logfile = '/var/www/opensource/logfile.log'
+logging.basicConfig(filename=logfile, level=logging.DEBUG)
+logging.info('ServerRun Start ML')
+
+UPLOAD_FOLDER = '/var/www/opensource/data/dataset/text'
+#UPLOAD_FOLDER = '/Users/lion/Documents/py-workspare/slash-ml/data/dataset/text'
 #ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 application = Flask('slashmlapi')
 
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-application.debug = True
+#application.debug = True
 
 application.secret_key = os.getenv('SECRET_KEY') or \
 'e5ac358c-f0bf-11e5-9e39-d3b532c10a28'
@@ -40,7 +47,7 @@ CORS(application)
 #cors = CORS(application, resources={r"/getresults": {"origins": "http://192.168.2.111:8000"}})
 application.config['CORS_HEADERS'] = 'Content-Type'
 
-toolbar = DebugToolbarExtension(application)
+#toolbar = DebugToolbarExtension(application)
 
 @application.route('/')
 def hello():
@@ -49,15 +56,22 @@ def hello():
     }
     return json.dumps(info)
 
+@application.before_request
+def before_request():
+    g.start_time = time.time()  # Store in g, applicable for this request and this user only
+
 @application.route('/getresults', methods=['GET', 'POST', 'OPTIONS'])
 def execute():
     if request.method == 'POST':
 
         from slashmlapi.controllers.result_controller import ResultController
 
-        result_controller = ResultController(request, **application.config)
+        result_controller = ResultController(g.start_time, request, **application.config)
 
         _, info = result_controller.start_operation()
+
+        time_taken = time.time() - g.start_time   # Retrieve from g
+        info['com_time'] = time_taken
 
         return json.dumps(info)
 

@@ -1,5 +1,4 @@
-"""
-
+""" 
 """
 
 import os
@@ -12,9 +11,15 @@ class ResultController(object):
     """ Handle request from client
     """
 
-    def __init__(self, client_request=request, **kwargs):
+    ''' def __init__(self, client_request=request, **kwargs):
+        self.kwargs = kwargs
+        self.request = client_request '''
+
+    def __init__(self, start_time, client_request=request, **kwargs):
         self.kwargs = kwargs
         self.request = client_request
+        self.start_time = start_time
+
 
     def start_operation(self):
         """ Execute the command from client
@@ -42,11 +47,11 @@ class ResultController(object):
                 list_algo = json_params['algo']
 
                 #results = MLManager.get_results(path_textfile, list_algo, '')
-                
+
                 #logging.info('Start ML')
                 #print('Start ML')
-
-                results = MLManager.get_results(path_textfile, list_algo, '')
+                #results = MLManager.get_results(path_textfile, list_algo, '')
+                results = MLManager.get_results(path_textfile, list_algo, '', self.start_time)
 
                 #print('End ML')
 
