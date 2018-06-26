@@ -129,7 +129,7 @@ class ResultController(object):
             try:
 
                 # Temp set params
-                params['algo'] = ['NB', 'NN']
+                params['algo'] = ['NB', 'NN', 'DT']
                 params['eval_setting'] = 'loo'
 
                 # Get params from client request
