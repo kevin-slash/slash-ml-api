@@ -61,6 +61,7 @@ def hello():
 def before_request():
     g.start_time = time.time()  # Store in g, applicable for this request and this user only
 
+
 @application.route('/getresults', methods=['GET', 'POST', 'OPTIONS'])
 def execute():
     if request.method == 'POST':
@@ -82,7 +83,38 @@ def execute():
         }
         return json.dumps(info)
 
+
+@application.route('/classify', methods=['GET', 'POST', 'OPTIONS'])
+def classify():
+    """ Classify based-on input text
+    """
+
+    if request.method == 'POST':
+        from slashmlapi.controllers.predict_controller import PredictController
+
+        # Basic configuration
+        config = {
+            'text_dir': 'data/dataset/chatbot',
+            'dataset': 'data/matrix',
+            'bag_of_words': 'data/bag_of_words',
+            'train_model': 'data/model/train.model'
+        }
+
+        predict_controller = PredictController(g.start_time, request, **config)
+        _, info = predict_controller.start_operation()
+        logging.info(info)
+
+        time_taken = time.time() - g.start_time   # Retrieve from g
+        info['com_time'] = time_taken
+
+        return json.dumps(info)
+    else:
+        info = {
+            'error': 'KO'
+        }
+        return json.dumps(info)
+
+
 if __name__ == '__main__':
     #port = int(os.environ.get("PORT", 5000))
-    #application.run('192.168.2.119', port=port)
     application.run(host='0.0.0.0')
