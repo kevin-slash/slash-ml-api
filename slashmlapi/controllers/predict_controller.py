@@ -5,6 +5,9 @@ Handle the client request, and return prediction results as dictionary to client
 import json
 from flask import request
 
+import logging
+logfile = '/Users/lion/Documents/py-workspare/slash-ml/logfile.log'
+
 class PredictController(object):
     """ Handle request from client
     """
@@ -14,8 +17,6 @@ class PredictController(object):
         self.request = client_request
         self.start_time = start_time
 
-        import logging
-        logfile = '/Users/lion/Documents/py-workspare/slash-ml/logfile.log'
         logging.basicConfig(filename=logfile, level=logging.DEBUG)
         logging.info('Prediction controller')
 
@@ -51,10 +52,11 @@ class PredictController(object):
             json_params = None
             params = {}
             try:
-                #logging.info('Interprete json data in check_text! %s' %(self.request.form.get('params')))
                 # Get params from client request
                 params = self.request.form.get('params')
                 json_params = json.loads(params)
+                # logging.info('Prediction controller %s' %self.request.form)
+                # logging.info('Prediction controller %s' %params)
             except ValueError as error:
                 error['error'] = 'Input string must be text, not bytes'
                 return error, json_params

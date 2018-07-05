@@ -6,20 +6,20 @@ import json
 from flask import request
 from werkzeug.utils import secure_filename
 
+import logging
+logfile = '/Users/lion/Documents/py-workspare/slash-ml/logfile.log'
 
 class ResultController(object):
     """ Handle request from client
     """
-
-    ''' def __init__(self, client_request=request, **kwargs):
-        self.kwargs = kwargs
-        self.request = client_request '''
 
     def __init__(self, start_time, client_request=request, **kwargs):
         self.kwargs = kwargs
         self.request = client_request
         self.start_time = start_time
 
+        logging.basicConfig(filename=logfile, level=logging.DEBUG)
+        logging.info('Result controller')
 
     def start_operation(self):
         """ Execute the command from client
@@ -37,24 +37,12 @@ class ResultController(object):
             if bool(is_error):
                 return is_error, json_params
             else:
-
                 # Start machine learning here
                 from slashmlapp.ml_manager import MLManager
 
-                #path_textfile = 'data.zip'
-                #list_algo = ['NB', 'NN']
+                # Path to zip file
                 path_textfile = info['filename']
-                list_algo = json_params['algo']
-
-                #results = MLManager.get_results(path_textfile, list_algo, '')
-
-                #logging.info('Start ML')
-                #print('Start ML')
-                #results = MLManager.get_results(path_textfile, list_algo, '')
-                results = MLManager.get_results(path_textfile, list_algo, '', self.start_time)
-
-                #print('End ML')
-
+                results = MLManager.get_results(path_textfile, json_params, '', self.start_time)
                 return True, results
         else:
             return is_good_file, info
@@ -84,7 +72,7 @@ class ResultController(object):
         # Get filename
         # Save to local hardrive
         filename = secure_filename(file.filename)
-        #file.save(os.path.join(self.kwargs['UPLOAD_FOLDER'], filename))
+        # file.save(os.path.join(self.kwargs['UPLOAD_FOLDER'], filename))
         is_saved, error = self.save_file(self.kwargs['UPLOAD_FOLDER'], filename, file)
 
         if is_saved:
@@ -120,32 +108,43 @@ class ResultController(object):
     def check_text(self):
         """ Validate the parameters from client's request
         """
+        logging.info('In check text: check_text')
 
         info = {}
         if request.method == 'POST':
-
-            json_params = None
+            #json_params = None
             params = {}
             try:
+                logging.info('Res controller %s' %params)
+                # Read parameters from client
+                cparams = self.request.form.to_dict(flat=True)
+                #cparams = {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][method]': 'doc_freq', 'params[PR][threshold]': '25', 'params[NN][hidden_layer_sizes][0]': '20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+                logging.info('Res controller cparams %s' %cparams)    
+                # # Temp set params
+                # # params['algo'] = ['NB', 'NN', 'DT']
+                # # params['eval_setting'] = 'loo'
+                # # params['PR'] = {'method': 'doc_freq', 'threshold': 25}
+                # # params['DT'] = {'criterion': 'gini', 'max_depth': 25, 'min_criterion': 0.05}
+                # # params['NN'] = {'hidden_layer_sizes': (250, 100), 'learning_rate': 0.012,\
+                # #  'momentum': 0.5, 'random_state':0, 'max_iter':200, 'activation': 'tanh'}
+                params['algo'] = [cparams['params[algo][0]'], cparams['params[algo][1]'], 'DT']
+                params['eval_setting'] = cparams['params[eval_setting]']
+                params['PR'] = {'method': cparams['params[PR][method]'], 'threshold': int(cparams['params[PR][threshold]'])}
+                params['DT'] = {'criterion': cparams['params[DT][criterion]'],\
+                'max_depth': int(cparams['params[DT][max_depth]']), 'min_criterion': float(cparams['params[DT][min_criterion]'])}
 
-                # Temp set params
-                params['algo'] = ['NB', 'NN', 'DT']
-                params['eval_setting'] = 'loo'
+                # Manipulate hidden layer in tuple
+                h_layer_sizes = tuple(int(x) for x in cparams['params[NN][hidden_layer_sizes]'].split(',') if x.strip())
 
-                # Get params from client request
-                #params = self.request.form.get('params')
-                #json_params = json.loads(params)
-                json_params = params
+                params['NN'] = {'hidden_layer_sizes': h_layer_sizes, 'learning_rate': float(cparams['params[NN][learning_rate]']),\
+                'momentum': float(cparams['params[NN][momentum]']), 'random_state':int(cparams['params[NN][random_state]']),\
+                'max_iter':int(cparams['params[NN][max_iter]']), 'activation': cparams['params[NN][activation]']}
+
+                logging.info('Res controller %s' %params)
             except ValueError:
                 info['error'] = 'Input string must be text, not bytes'
             else:
-                return info, json_params
+                return info, params
         else:
             info['error'] = 'Not support method'
             return info, None
-
-if __name__ == "__main__":
-    
-    result_controller = ResultController()
-    _info, _params = result_controller.check_text()
-    print(_info)

@@ -28,8 +28,7 @@ logging.basicConfig(filename=logfile, level=logging.DEBUG)
 logging.info('ServerRun Start ML')
 
 #UPLOAD_FOLDER = '/var/www/opensource/data/dataset/text'
-UPLOAD_FOLDER = '/Users/lion/Documents/py-workspare/slash-ml/data/dataset/text'
-#ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+UPLOAD_FOLDER = os.getcwd() +  '/data/dataset/text'
 
 application = Flask('slashmlapi')
 
