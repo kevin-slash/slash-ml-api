@@ -35,8 +35,8 @@ class PredictController(object):
             from slashmlapp.ml_manager import MLManager
 
             text = json_params['input_text']
+            self.kwargs['threshold'] = json_params['threshold']
             results = MLManager.classify(self.kwargs, text)
-            #logging.info('Predict_Controller: %s' %(json_params))
 
             return True, results
         else:

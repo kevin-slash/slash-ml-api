@@ -27,8 +27,8 @@ logfile = '/Users/lion/Documents/py-workspare/slash-ml/logfile.log'
 logging.basicConfig(filename=logfile, level=logging.DEBUG)
 logging.info('ServerRun Start ML')
 
-#UPLOAD_FOLDER = '/var/www/opensource/data/dataset/text'
-UPLOAD_FOLDER = os.getcwd() +  '/data/dataset/text'
+# File directory
+UPLOAD_FOLDER = os.getcwd() +  '/data/{session}/dataset/text'
 
 application = Flask('slashmlapi')
 
@@ -65,9 +65,34 @@ def before_request():
 def execute():
     if request.method == 'POST':
 
-        from slashmlapi.controllers.result_controller import ResultController
+        # Basic configuration
+        config = {
+            'text_dir': 'data/{session}/dataset/text',
+            'archive_dir': 'data/{session}/dataset/temp',
+            'dataset': 'data/{session}/matrix',
+            'bag_of_words': 'data/{session}/bag_of_words',
+            'train_model': 'data/{session}/model/train.model',
+            'label_match': 'data/{session}/bag_of_words/label_match.pickle'
+        }
 
-        result_controller = ResultController(g.start_time, request, **application.config)
+        # Get headers
+        headers = request.headers
+
+        # Get session id from header
+        sid = 'deadbeefbabe2c00ffee'
+        for key, val in headers.items():
+            if key == 'Session-Id':
+                sid = val
+
+        # Update session id
+        application.config['UPLOAD_FOLDER'] = application.config['UPLOAD_FOLDER'].replace("{session}", sid)
+
+        for attribute in config:
+            config[attribute] = config[attribute].replace("{session}", sid)
+
+        # Initialize Result Controller
+        from slashmlapi.controllers.result_controller import ResultController
+        result_controller = ResultController(g.start_time, request, config=config, **application.config)
 
         _, info = result_controller.start_operation()
 
@@ -93,11 +118,25 @@ def classify():
 
         # Basic configuration
         config = {
-            'text_dir': 'data/dataset/chatbot',
-            'dataset': 'data/matrix',
-            'bag_of_words': 'data/bag_of_words',
-            'train_model': 'data/model/train.model'
+            'text_dir': 'data/{session}/dataset/text',
+            'archive_dir': 'data/{session}/dataset/temp',
+            'dataset': 'data/{session}/matrix',
+            'bag_of_words': 'data/{session}/bag_of_words',
+            'train_model': 'data/{session}/model/train.model',
+            'label_match': 'data/{session}/bag_of_words/label_match.pickle',
         }
+
+        # Get headers
+        headers = request.headers
+
+        # Get session id from header
+        sid = 'deadbeefbabe2c00ffee'
+        for key, val in headers.items():
+            if key == 'Session-Id':
+                sid = val
+
+        for attribute in config:
+            config[attribute] = config[attribute].replace("{session}", sid)
 
         predict_controller = PredictController(g.start_time, request, **config)
         _, info = predict_controller.start_operation()

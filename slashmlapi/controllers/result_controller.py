@@ -2,9 +2,12 @@
 """
 
 import os
+import ntpath
 import json
 from flask import request
 from werkzeug.utils import secure_filename
+
+from khmerml.utils.file_util import FileUtil
 
 import logging
 logfile = '/Users/lion/Documents/py-workspare/slash-ml/logfile.log'
@@ -13,13 +16,18 @@ class ResultController(object):
     """ Handle request from client
     """
 
-    def __init__(self, start_time, client_request=request, **kwargs):
+    def __init__(self, start_time, client_request=request, config={}, **kwargs):
         self.kwargs = kwargs
+        self.config = config
         self.request = client_request
         self.start_time = start_time
 
+        # Create Directory based on config file
+        self.create_dir(self.config)
+
         logging.basicConfig(filename=logfile, level=logging.DEBUG)
         logging.info('Result controller')
+
 
     def start_operation(self):
         """ Execute the command from client
@@ -42,7 +50,7 @@ class ResultController(object):
 
                 # Path to zip file
                 path_textfile = info['filename']
-                results = MLManager.get_results(path_textfile, json_params, '', self.start_time)
+                results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
                 return True, results
         else:
             return is_good_file, info
@@ -74,9 +82,8 @@ class ResultController(object):
         filename = secure_filename(file.filename)
         # file.save(os.path.join(self.kwargs['UPLOAD_FOLDER'], filename))
         is_saved, error = self.save_file(self.kwargs['UPLOAD_FOLDER'], filename, file)
-
+    
         if is_saved:
-
             # Return filename
             status['filename'] = filename
             return True, status
@@ -117,9 +124,13 @@ class ResultController(object):
             try:
                 logging.info('Res controller %s' %params)
                 # Read parameters from client
-                cparams = self.request.form.to_dict(flat=True)
-                #cparams = {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][method]': 'doc_freq', 'params[PR][threshold]': '25', 'params[NN][hidden_layer_sizes][0]': '20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
-                logging.info('Res controller cparams %s' %cparams)    
+                #cparams = self.request.form.to_dict(flat=True)
+                cparams = {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+                #cparams = self.request.form.get('params')
+                #cparams = json.loads(cparams)
+
+                logging.info('Res controller cparams %s' %cparams)
+
                 # # Temp set params
                 # # params['algo'] = ['NB', 'NN', 'DT']
                 # # params['eval_setting'] = 'loo'
@@ -148,3 +159,15 @@ class ResultController(object):
         else:
             info['error'] = 'Not support method'
             return info, None
+
+    def create_dir(self, config):
+        """ Create directories
+        """
+
+        for attribute in config:
+            head, tail = ntpath.split(config[attribute])
+
+            if tail == 'train.model' or tail == 'label_match.pickle':
+                FileUtil.make_dir(head)
+            else:
+                FileUtil.make_dir(config[attribute])
