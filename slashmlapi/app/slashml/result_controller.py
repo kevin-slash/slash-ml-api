@@ -1,4 +1,4 @@
-""" 
+"""
 """
 
 import os
@@ -8,9 +8,9 @@ from flask import request
 from werkzeug.utils import secure_filename
 
 from khmerml.utils.file_util import FileUtil
+from slashmlapi.config import LOG_FILE
 
 import logging
-logfile = '/Users/lion/Documents/py-workspare/slash-ml/logfile.log'
 
 class ResultController(object):
     """ Handle request from client
@@ -25,7 +25,7 @@ class ResultController(object):
         # Create Directory based on config file
         self.create_dir(self.config)
 
-        logging.basicConfig(filename=logfile, level=logging.DEBUG)
+        logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG)
         logging.info('Result controller')
 
 
@@ -46,7 +46,7 @@ class ResultController(object):
                 return is_error, json_params
             else:
                 # Start machine learning here
-                from slashmlapp.ml_manager import MLManager
+                from slashmlapi.app.slashml.ml_manager import MLManager
 
                 # Path to zip file
                 path_textfile = info['filename']
@@ -82,7 +82,7 @@ class ResultController(object):
         filename = secure_filename(file.filename)
         # file.save(os.path.join(self.kwargs['UPLOAD_FOLDER'], filename))
         is_saved, error = self.save_file(self.kwargs['UPLOAD_FOLDER'], filename, file)
-    
+
         if is_saved:
             # Return filename
             status['filename'] = filename
@@ -168,6 +168,6 @@ class ResultController(object):
             head, tail = ntpath.split(config[attribute])
 
             if tail == 'train.model' or tail == 'label_match.pickle':
-                FileUtil.make_dir(head)
+                FileUtil.create_folder(head)
             else:
-                FileUtil.make_dir(config[attribute])
+                FileUtil.create_folder(config[attribute])

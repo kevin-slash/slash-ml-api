@@ -17,7 +17,7 @@ def configuration(parent_package='', top_path=None):
     # submodules which do not have their own setup.py
     # we must manually add sub-submodules & tests
     #config.add_subpackage('examples')
-    config.add_subpackage('controllers')
+    config.add_subpackage('app')
 
     return config
 

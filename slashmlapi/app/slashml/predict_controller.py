@@ -4,9 +4,9 @@ Handle the client request, and return prediction results as dictionary to client
 
 import json
 from flask import request
+from slashmlapi.config import LOG_FILE
 
 import logging
-logfile = '/Users/lion/Documents/py-workspare/slash-ml/logfile.log'
 
 class PredictController(object):
     """ Handle request from client
@@ -17,7 +17,7 @@ class PredictController(object):
         self.request = client_request
         self.start_time = start_time
 
-        logging.basicConfig(filename=logfile, level=logging.DEBUG)
+        logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG)
         logging.info('Prediction controller')
 
 
