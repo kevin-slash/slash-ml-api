@@ -32,7 +32,7 @@ class PredictController(object):
 
         if not error:
             # Start machine learning here
-            from slashmlapp.ml_manager import MLManager
+            from slashmlapi.app.slashml.ml_manager import MLManager
 
             text = json_params['input_text']
             self.kwargs['threshold'] = json_params['threshold']
