@@ -50,6 +50,7 @@ class ResultController(object):
 
                 # Path to zip file
                 path_textfile = info['filename']
+                print(json_params)
                 results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
                 return True, results
         else:
@@ -126,7 +127,7 @@ class ResultController(object):
                 # Read parameters from client
                 #cparams = self.request.form.to_dict(flat=True)
                 cparams = {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
-                #cparams = self.request.form.get('params')
+                cparams = self.request.form.to_dict(flat=True)
                 #cparams = json.loads(cparams)
 
                 logging.info('Res controller cparams %s' %cparams)

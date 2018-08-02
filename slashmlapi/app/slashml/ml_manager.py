@@ -79,6 +79,7 @@ class MLManager(object):
 
       # preposessing
       params_prepro = params['PR']
+
       dataset_matrix = prepro.loading_data(config['text_dir'], params_prepro['method'],\
        'all', params_prepro['threshold'])
 
