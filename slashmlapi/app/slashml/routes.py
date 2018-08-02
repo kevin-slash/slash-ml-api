@@ -54,14 +54,14 @@ def execute():
                 sid = val
 
         # Update session id
-        slashmlapi.app.config['UPLOAD_FOLDER'] = slashmlapi.app.config['UPLOAD_FOLDER'].replace("{session}", sid)
+        slashmlapi.application.config['UPLOAD_FOLDER'] = slashmlapi.application.config['UPLOAD_FOLDER'].replace("{session}", sid)
 
         for attribute in config:
             config[attribute] = config[attribute].replace("{session}", sid)
 
         # Initialize Result Controller
         from slashmlapi.app.slashml.result_controller import ResultController
-        result_controller = ResultController(g.start_time, request, config=config, **slashmlapi.app.config)
+        result_controller = ResultController(g.start_time, request, config=config, **slashmlapi.application.config)
 
         _, info = result_controller.start_operation()
 
