@@ -33,7 +33,6 @@ import os
 import json
 from flask import Flask, session, g
 #from flask_debugtoolbar import DebugToolbarExtension
-from flask_session import Session
 from flask import render_template, request, redirect, session, make_response
 from flask_wtf import FlaskForm
 from wtforms import StringField
@@ -48,13 +47,13 @@ from slashmlapi.config import LOG_FILE
 
 import logging
 
-app_globals = {}
+application_globals = {}
 
-def init_app():
-    if app_globals.get('app', False):
-        app = app_globals['app']
+def init_application():
+    if application_globals.get('application', False):
+        appmain = application_globals['application']
     else:
-        app = Flask(__name__)
+        appmain = Flask(__name__)
 
     #logfile = '/var/www/opensource/logfile.log'
     logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG)
@@ -64,26 +63,26 @@ def init_app():
     UPLOAD_FOLDER = os.getcwd() + '/data/{session}/dataset/text'
 
 
-    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    appmain.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-    #app.debug = True
+    #application.debug = True
 
-    app.secret_key = os.getenv('SECRET_KEY') or \
+    appmain.secret_key = os.getenv('SECRET_KEY') or \
     'e5ac358c-f0bf-11e5-9e39-d3b532c10a28'
-    app.config['SECRET_KEY'] = app.secret_key
+    appmain.config['SECRET_KEY'] = appmain.secret_key
 
-    app.config['SESSION_TYPE'] = 'filesystem'
+    appmain.config['SESSION_TYPE'] = 'filesystem'
 
     # Allow authorizartion header
-    CORS(app)
-    #cors = CORS(app, resources={r"/getresults": {"origins": "http://192.168.2.111:8000"}})
-    app.config['CORS_HEADERS'] = 'Content-Type'
+    CORS(appmain)
+    #cors = CORS(application, resources={r"/getresults": {"origins": "http://192.168.2.111:8000"}})
+    appmain.config['CORS_HEADERS'] = 'Content-Type'
 
-    #toolbar = DebugToolbarExtension(app)
+    #toolbar = DebugToolbarExtension(application)
 
     from slashmlapi.app.slashml.routes import routes
-    app.register_blueprint(routes, url_prefix="/")
+    appmain.register_blueprint(routes, url_prefix="/")
 
-    return app
+    return appmain
 
-app = init_app()
+application = init_application()
