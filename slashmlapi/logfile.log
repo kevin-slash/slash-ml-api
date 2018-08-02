@@ -1,0 +1,20 @@
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]

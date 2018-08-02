@@ -63,7 +63,8 @@ class MLManager(object):
 
     # Store config for next use
     config = config
-
+    is_unicode = config.get('is_unicode', None)
+    config['is_unicode'] = 'true' if is_unicode != None else False
     #logfile = '/Users/lion/Documents/py-workspare/slash-ml/logfile.log'
     #logging.basicConfig(filename=logfile, level=logging.DEBUG)
 
@@ -150,7 +151,7 @@ class MLManager(object):
     # Preprocess: transform text to frequency
     prepro = Preprocessing(**config)
     mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
-
+    print(mat)
     # Initialize only 3 algorithms at the moment
     ml = MachineLearning(**config)
 
