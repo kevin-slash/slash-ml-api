@@ -97,7 +97,7 @@ class ResultController(object):
     def save_file(self, path_to_dir, filename, file_object=request.files):
         """ Save file sent from client to local hardrive
         """
-
+        print(filename)
         ## check if a file exists on disk ##
         ## if exists, delete it else show message on screen ##
         if os.path.exists(path_to_dir):
@@ -163,10 +163,10 @@ class ResultController(object):
     def create_dir(self, config):
         """ Create directories
         """
-
+        print(config)
         for attribute in config:
             head, tail = ntpath.split(config[attribute])
-
+            print(config[attribute])
             if tail == 'train.model' or tail == 'label_match.pickle':
                 FileUtil.create_folder(head)
             else:
