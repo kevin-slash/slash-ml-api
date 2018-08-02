@@ -18,3 +18,1259 @@ INFO:root:Res controller {}
 INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
 INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
 DEBUG:root:[]
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:12:00] "[37mPOST /getresults HTTP/1.1[0m" 200 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 162, in classify
+    nb_prediction = nb_algo.predict(nb_model, [mat])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/algorithms/bayes/naive_bayes.py", line 79, in predict
+    _, label = self.calculate_posteriori(model, test_vector)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/algorithms/bayes/bayes_base.py", line 92, in calculate_posteriori
+    likelihood = reduce(lambda x, y: Decimal(x) * Decimal(y), _likelihoods)
+TypeError: reduce() of empty sequence with no initial value
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:13:40] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 59, in check_text
+    json_params = json.loads(params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/json/__init__.py", line 354, in loads
+    return _default_decoder.decode(s)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/json/decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/json/decoder.py", line 355, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 40 (char 39)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 31, in start_operation
+    error, json_params = self.check_text()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 63, in check_text
+    error['error'] = 'Input string must be text, not bytes'
+TypeError: 'JSONDecodeError' object does not support item assignment
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:16:31] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 126, in loading_single_doc
+    _new_words = UnicodeSplit().unicode_split(document)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/unicodesplit.py", line 13, in unicode_split
+    file_name = segment.add_to_file(text)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/khmersegment.py", line 13, in add_to_file
+    f = open(file, 'w')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/km-5tag-seg-1.0/sample/1533194199212363.txt'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:16:39] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 126, in loading_single_doc
+    _new_words = UnicodeSplit().unicode_split(document)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/unicodesplit.py", line 13, in unicode_split
+    file_name = segment.add_to_file(text)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/khmersegment.py", line 13, in add_to_file
+    f = open(file, 'w')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/km-5tag-seg-1.0/sample/1533194200017516.txt'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:16:40] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 126, in loading_single_doc
+    _new_words = UnicodeSplit().unicode_split(document)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/unicodesplit.py", line 13, in unicode_split
+    file_name = segment.add_to_file(text)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/khmersegment.py", line 13, in add_to_file
+    f = open(file, 'w')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/km-5tag-seg-1.0/sample/1533194200254032.txt'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:16:40] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 126, in loading_single_doc
+    _new_words = UnicodeSplit().unicode_split(document)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/unicodesplit.py", line 13, in unicode_split
+    file_name = segment.add_to_file(text)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/khmersegment.py", line 13, in add_to_file
+    f = open(file, 'w')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/km-5tag-seg-1.0/sample/1533194200464033.txt'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:16:40] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 126, in loading_single_doc
+    _new_words = UnicodeSplit().unicode_split(document)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/unicodesplit.py", line 13, in unicode_split
+    file_name = segment.add_to_file(text)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/khmersegment.py", line 13, in add_to_file
+    f = open(file, 'w')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/km-5tag-seg-1.0/sample/1533194200683930.txt'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:16:40] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 126, in loading_single_doc
+    _new_words = UnicodeSplit().unicode_split(document)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/unicodesplit.py", line 13, in unicode_split
+    file_name = segment.add_to_file(text)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/khmersegment.py", line 13, in add_to_file
+    f = open(file, 'w')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/km-5tag-seg-1.0/sample/1533194200886034.txt'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:16:40] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 126, in loading_single_doc
+    _new_words = UnicodeSplit().unicode_split(document)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/unicodesplit.py", line 13, in unicode_split
+    file_name = segment.add_to_file(text)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/khmersegment.py", line 13, in add_to_file
+    f = open(file, 'w')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/km-5tag-seg-1.0/sample/1533194201043892.txt'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:16:41] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 126, in loading_single_doc
+    _new_words = UnicodeSplit().unicode_split(document)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/unicodesplit.py", line 13, in unicode_split
+    file_name = segment.add_to_file(text)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/khmersegment.py", line 13, in add_to_file
+    f = open(file, 'w')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/km-5tag-seg-1.0/sample/1533194201667261.txt'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:16:41] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 162, in classify
+    nb_prediction = nb_algo.predict(nb_model, [mat])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/algorithms/bayes/naive_bayes.py", line 79, in predict
+    _, label = self.calculate_posteriori(model, test_vector)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/algorithms/bayes/bayes_base.py", line 92, in calculate_posteriori
+    likelihood = reduce(lambda x, y: Decimal(x) * Decimal(y), _likelihoods)
+TypeError: reduce() of empty sequence with no initial value
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:16:59] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 123, in loading_single_doc
+    '/'+feature_choice+'_'+str(threshold)+'.pickle')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 141, in load_pickle
+    with open(path_to_pickle, 'rb') as handle:
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/sophatvathana/slash/slash-ml-api/slashmlapi/data/deadbeefbabe2c00ffee/bag_of_words/doc_freq_1.pickle'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:17:02] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 123, in loading_single_doc
+    '/'+feature_choice+'_'+str(threshold)+'.pickle')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 141, in load_pickle
+    with open(path_to_pickle, 'rb') as handle:
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/sophatvathana/slash/slash-ml-api/slashmlapi/data/deadbeefbabe2c00ffee/bag_of_words/doc_freq_1.pickle'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:17:03] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 123, in loading_single_doc
+    '/'+feature_choice+'_'+str(threshold)+'.pickle')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 141, in load_pickle
+    with open(path_to_pickle, 'rb') as handle:
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/sophatvathana/slash/slash-ml-api/slashmlapi/data/deadbeefbabe2c00ffee/bag_of_words/doc_freq_1.pickle'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:17:03] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 123, in loading_single_doc
+    '/'+feature_choice+'_'+str(threshold)+'.pickle')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 141, in load_pickle
+    with open(path_to_pickle, 'rb') as handle:
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/sophatvathana/slash/slash-ml-api/slashmlapi/data/deadbeefbabe2c00ffee/bag_of_words/doc_freq_1.pickle'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:17:03] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 123, in loading_single_doc
+    '/'+feature_choice+'_'+str(threshold)+'.pickle')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 141, in load_pickle
+    with open(path_to_pickle, 'rb') as handle:
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/sophatvathana/slash/slash-ml-api/slashmlapi/data/deadbeefbabe2c00ffee/bag_of_words/doc_freq_1.pickle'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:17:03] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 123, in loading_single_doc
+    '/'+feature_choice+'_'+str(threshold)+'.pickle')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 141, in load_pickle
+    with open(path_to_pickle, 'rb') as handle:
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/sophatvathana/slash/slash-ml-api/slashmlapi/data/deadbeefbabe2c00ffee/bag_of_words/doc_freq_1.pickle'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:17:03] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 123, in loading_single_doc
+    '/'+feature_choice+'_'+str(threshold)+'.pickle')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 141, in load_pickle
+    with open(path_to_pickle, 'rb') as handle:
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/sophatvathana/slash/slash-ml-api/slashmlapi/data/deadbeefbabe2c00ffee/bag_of_words/doc_freq_1.pickle'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:17:04] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 123, in loading_single_doc
+    '/'+feature_choice+'_'+str(threshold)+'.pickle')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 141, in load_pickle
+    with open(path_to_pickle, 'rb') as handle:
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/sophatvathana/slash/slash-ml-api/slashmlapi/data/deadbeefbabe2c00ffee/bag_of_words/doc_freq_1.pickle'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:19:44] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 53, in start_operation
+    results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 91, in get_results
+    dataset_sample = FileUtil.load_csv(dataset_path)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 36, in load_csv
+    return FileUtil.load_csv_np(filename)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 63, in load_csv_np
+    _dataset = genfromtxt(filename, delimiter=',')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/npyio.py", line 1689, in genfromtxt
+    fhd = iter(np.lib._datasource.open(fname, 'rt', encoding=encoding))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/_datasource.py", line 260, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/_datasource.py", line 616, in open
+    raise IOError("%s not found." % path)
+OSError: /Users/sophatvathana/slash/slash-ml-api/slashmlapi/data/deadbeefbabe2c00ffee/matrix/doc_freq_25.csv not found.
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:25:49] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 53, in start_operation
+    results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 91, in get_results
+    dataset_sample = FileUtil.load_csv(dataset_path)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 36, in load_csv
+    return FileUtil.load_csv_np(filename)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 63, in load_csv_np
+    _dataset = genfromtxt(filename, delimiter=',')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/npyio.py", line 1689, in genfromtxt
+    fhd = iter(np.lib._datasource.open(fname, 'rt', encoding=encoding))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/_datasource.py", line 260, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/_datasource.py", line 616, in open
+    raise IOError("%s not found." % path)
+OSError: /Users/sophatvathana/slash/slash-ml-api/slashmlapi/data/deadbeefbabe2c00ffee/matrix/doc_freq_25.csv not found.
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:26:50] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 53, in start_operation
+    results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 91, in get_results
+    dataset_sample = FileUtil.load_csv(dataset_path)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 36, in load_csv
+    return FileUtil.load_csv_np(filename)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 63, in load_csv_np
+    _dataset = genfromtxt(filename, delimiter=',')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/npyio.py", line 1689, in genfromtxt
+    fhd = iter(np.lib._datasource.open(fname, 'rt', encoding=encoding))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/_datasource.py", line 260, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/_datasource.py", line 616, in open
+    raise IOError("%s not found." % path)
+OSError: /Users/sophatvathana/slash/slash-ml-api/slashmlapi/data/deadbeefbabe2c00ffee/matrix/doc_freq_25.csv not found.
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:27:21] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 53, in start_operation
+    results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 91, in get_results
+    dataset_sample = FileUtil.load_csv(dataset_path)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 36, in load_csv
+    return FileUtil.load_csv_np(filename)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 63, in load_csv_np
+    _dataset = genfromtxt(filename, delimiter=',')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/npyio.py", line 1689, in genfromtxt
+    fhd = iter(np.lib._datasource.open(fname, 'rt', encoding=encoding))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/_datasource.py", line 260, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/_datasource.py", line 616, in open
+    raise IOError("%s not found." % path)
+OSError: /Users/sophatvathana/slash/slash-ml-api/slashmlapi/data/deadbeefbabe2c00ffee/matrix/doc_freq_25.csv not found.
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:28:25] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 53, in start_operation
+    results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 91, in get_results
+    dataset_sample = FileUtil.load_csv(dataset_path)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 36, in load_csv
+    return FileUtil.load_csv_np(filename)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 63, in load_csv_np
+    _dataset = genfromtxt(filename, delimiter=',')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/npyio.py", line 1689, in genfromtxt
+    fhd = iter(np.lib._datasource.open(fname, 'rt', encoding=encoding))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/_datasource.py", line 260, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/_datasource.py", line 616, in open
+    raise IOError("%s not found." % path)
+OSError: /Users/sophatvathana/slash/slash-ml-api/slashmlapi/data/deadbeefbabe2c00ffee/matrix/doc_freq_25.csv not found.
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:29:43] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 53, in start_operation
+    results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 91, in get_results
+    dataset_sample = FileUtil.load_csv(dataset_path)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 36, in load_csv
+    return FileUtil.load_csv_np(filename)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 63, in load_csv_np
+    _dataset = genfromtxt(filename, delimiter=',')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/npyio.py", line 1689, in genfromtxt
+    fhd = iter(np.lib._datasource.open(fname, 'rt', encoding=encoding))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/_datasource.py", line 260, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/_datasource.py", line 616, in open
+    raise IOError("%s not found." % path)
+OSError: /Users/sophatvathana/slash/slash-ml-api/slashmlapi/data/deadbeefbabe2c00ffee/matrix/doc_freq_25.csv not found.
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:38:10] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 53, in start_operation
+    results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 91, in get_results
+    dataset_sample = FileUtil.load_csv(dataset_path)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 36, in load_csv
+    return FileUtil.load_csv_np(filename)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 63, in load_csv_np
+    _dataset = genfromtxt(filename, delimiter=',')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/npyio.py", line 1689, in genfromtxt
+    fhd = iter(np.lib._datasource.open(fname, 'rt', encoding=encoding))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/_datasource.py", line 260, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/_datasource.py", line 616, in open
+    raise IOError("%s not found." % path)
+OSError: /Users/sophatvathana/slash/slash-ml-api/slashmlapi/data/deadbeefbabe2c00ffee/matrix/doc_freq_25.csv not found.
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:39:53] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 53, in start_operation
+    results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 110, in get_results
+    nb_result = MLManager.perform_algo(ml, nb_algo, dataset_sample)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 29, in perform_algo
+    training_set, test_set = ml.split_dataset(dataset, 1)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/machine_learning.py", line 63, in split_dataset
+    return self.train_test_split(dataset, n_test_by_class=2)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/machine_learning.py", line 91, in train_test_split
+    sorted_dataset = dataset[dataset[:, -1].argsort()]
+IndexError: too many indices for array
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:44:54] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 53, in start_operation
+    results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 110, in get_results
+    nb_result = MLManager.perform_algo(ml, nb_algo, dataset_sample)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 29, in perform_algo
+    training_set, test_set = ml.split_dataset(dataset, 1)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/machine_learning.py", line 63, in split_dataset
+    return self.train_test_split(dataset, n_test_by_class=2)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/machine_learning.py", line 91, in train_test_split
+    sorted_dataset = dataset[dataset[:, -1].argsort()]
+IndexError: too many indices for array
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:45:38] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 53, in start_operation
+    results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 110, in get_results
+    nb_result = MLManager.perform_algo(ml, nb_algo, dataset_sample)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 29, in perform_algo
+    training_set, test_set = ml.split_dataset(dataset, 1)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/machine_learning.py", line 63, in split_dataset
+    return self.train_test_split(dataset, n_test_by_class=2)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/machine_learning.py", line 91, in train_test_split
+    sorted_dataset = dataset[dataset[:, -1].argsort()]
+IndexError: too many indices for array
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:46:01] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 53, in start_operation
+    results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 110, in get_results
+    nb_result = MLManager.perform_algo(ml, nb_algo, dataset_sample)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 29, in perform_algo
+    training_set, test_set = ml.split_dataset(dataset, 1)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/machine_learning.py", line 63, in split_dataset
+    return self.train_test_split(dataset, n_test_by_class=2)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/machine_learning.py", line 91, in train_test_split
+    sorted_dataset = dataset[dataset[:, -1].argsort()]
+IndexError: too many indices for array
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:55:18] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:[]
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 53, in start_operation
+    results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 110, in get_results
+    nb_result = MLManager.perform_algo(ml, nb_algo, dataset_sample)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 29, in perform_algo
+    training_set, test_set = ml.split_dataset(dataset, 1)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/machine_learning.py", line 63, in split_dataset
+    return self.train_test_split(dataset, n_test_by_class=2)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/machine_learning.py", line 91, in train_test_split
+    sorted_dataset = dataset[dataset[:, -1].argsort()]
+IndexError: too many indices for array
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:55:24] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:['thank']
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 53, in start_operation
+    results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 110, in get_results
+    nb_result = MLManager.perform_algo(ml, nb_algo, dataset_sample)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 33, in perform_algo
+    pred_test = algo.predict(model, test_set)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/algorithms/bayes/naive_bayes.py", line 79, in predict
+    _, label = self.calculate_posteriori(model, test_vector)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/algorithms/bayes/bayes_base.py", line 95, in calculate_posteriori
+    posteriori = priori * likelihood
+TypeError: unsupported operand type(s) for *: 'decimal.Decimal' and 'float'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:55:38] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:['thank']
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 53, in start_operation
+    results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 110, in get_results
+    nb_result = MLManager.perform_algo(ml, nb_algo, dataset_sample)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 33, in perform_algo
+    pred_test = algo.predict(model, test_set)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/algorithms/bayes/naive_bayes.py", line 79, in predict
+    _, label = self.calculate_posteriori(model, test_vector)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/algorithms/bayes/bayes_base.py", line 95, in calculate_posteriori
+    posteriori = priori * likelihood
+TypeError: unsupported operand type(s) for *: 'decimal.Decimal' and 'float'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:55:45] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:['thank']
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 53, in start_operation
+    results = MLManager.get_results(path_textfile, json_params, self.config, self.start_time)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 110, in get_results
+    nb_result = MLManager.perform_algo(ml, nb_algo, dataset_sample)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 33, in perform_algo
+    pred_test = algo.predict(model, test_set)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/algorithms/bayes/naive_bayes.py", line 79, in predict
+    _, label = self.calculate_posteriori(model, test_vector)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/algorithms/bayes/bayes_base.py", line 95, in calculate_posteriori
+    posteriori = priori * likelihood
+TypeError: unsupported operand type(s) for *: 'decimal.Decimal' and 'float'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:55:57] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:['thank']
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:57:35] "[37mPOST /getresults HTTP/1.1[0m" 200 -
+INFO:root:Prediction controller
+ERROR:flask.app:Exception on /classify [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 111, in classify
+    _, info = predict_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/predict_controller.py", line 41, in start_operation
+    results = MLManager.classify(self.kwargs, text)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/ml_manager.py", line 153, in classify
+    mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/preprocessing/preprocessing_data.py", line 124, in loading_single_doc
+    '/'+feature_choice+'_'+str(threshold)+'.pickle')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/khmerml/utils/file_util.py", line 141, in load_pickle
+    with open(path_to_pickle, 'rb') as handle:
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/sophatvathana/slash/slash-ml-api/slashmlapi/data/deadbeefbabe2c00ffee/bag_of_words/doc_freq_1.pickle'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:57:39] "[1m[35mPOST /classify HTTP/1.1[0m" 500 -
+INFO:root:Prediction controller
+INFO:root:{'NB': ['goodbye'], 'NN': ['greetings'], 'DT': []}
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:58:07] "[37mPOST /classify HTTP/1.1[0m" 200 -
+INFO:root:Prediction controller
+INFO:root:{'NB': ['goodbye'], 'NN': ['greetings'], 'DT': []}
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:58:09] "[37mPOST /classify HTTP/1.1[0m" 200 -
+INFO:root:Prediction controller
+INFO:root:{'NB': ['goodbye'], 'NN': ['greetings'], 'DT': []}
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:58:11] "[37mPOST /classify HTTP/1.1[0m" 200 -
+INFO:root:Prediction controller
+INFO:root:{'NB': ['goodbye'], 'NN': ['greetings'], 'DT': []}
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:58:11] "[37mPOST /classify HTTP/1.1[0m" 200 -
+INFO:root:Prediction controller
+INFO:root:{'NB': ['goodbye'], 'NN': ['greetings'], 'DT': []}
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:58:12] "[37mPOST /classify HTTP/1.1[0m" 200 -
+INFO:root:Prediction controller
+INFO:root:{'NB': ['goodbye'], 'NN': ['greetings'], 'DT': []}
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:58:13] "[37mPOST /classify HTTP/1.1[0m" 200 -
+INFO:root:Prediction controller
+INFO:root:{'NB': ['goodbye'], 'NN': ['greetings'], 'DT': []}
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:58:14] "[37mPOST /classify HTTP/1.1[0m" 200 -

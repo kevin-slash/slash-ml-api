@@ -67,7 +67,7 @@ class MLManager(object):
     config['is_unicode'] = 'true' if is_unicode != None else False
     #logfile = '/Users/lion/Documents/py-workspare/slash-ml/logfile.log'
     #logging.basicConfig(filename=logfile, level=logging.DEBUG)
-
+    config['passion'] = "passion"
     # Perform features extraction
     is_successful_fextract = MLManager.extract_features(path_textfile, config)
     #is_successful_fextract = True
