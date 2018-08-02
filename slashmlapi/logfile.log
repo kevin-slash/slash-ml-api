@@ -1274,3 +1274,305 @@ INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:58:13] "[37mPOST /classify HTTP/1.1
 INFO:root:Prediction controller
 INFO:root:{'NB': ['goodbye'], 'NN': ['greetings'], 'DT': []}
 INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 14:58:14] "[37mPOST /classify HTTP/1.1[0m" 200 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': 'loo', 'PR': {'method': 'doc_freq', 'threshold': 25}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (25, 20), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:['thank']
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 15:36:42] "[37mPOST /getresults HTTP/1.1[0m" 200 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': 'loo', 'params[PR][threshold]': '25', 'params[PR][method]': 'doc_freq', 'params[NN][hidden_layer_sizes]': '25,20', 'params[NN][hidden_layer_sizes][1]': '56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 43, in start_operation
+    is_error, json_params = self.check_text()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 143, in check_text
+    params['PR'] = {'method': cparams['params[PR][method]'], 'threshold': int(params['params[PR][threshold]'])}
+KeyError: 'params[PR][threshold]'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 15:38:04] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams None
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 43, in start_operation
+    is_error, json_params = self.check_text()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 141, in check_text
+    params['algo'] = [cparams['params[algo][0]'], cparams['params[algo][1]'], 'DT']
+TypeError: 'NoneType' object is not subscriptable
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 15:42:17] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams None
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 43, in start_operation
+    is_error, json_params = self.check_text()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 142, in check_text
+    params['algo'] = [cparams['params[algo][0]'], cparams['params[algo][1]'], 'DT']
+TypeError: 'NoneType' object is not subscriptable
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 15:43:04] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 43, in start_operation
+    is_error, json_params = self.check_text()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 128, in check_text
+    print(self.request.form.get())
+TypeError: get() missing 1 required positional argument: 'key'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 15:43:21] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 43, in start_operation
+    is_error, json_params = self.check_text()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 128, in check_text
+    print(self.request.form.get())
+TypeError: get() missing 1 required positional argument: 'key'
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 15:43:26] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams None
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 43, in start_operation
+    is_error, json_params = self.check_text()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 142, in check_text
+    params['algo'] = [cparams['params[algo][0]'], cparams['params[algo][1]'], 'DT']
+TypeError: 'NoneType' object is not subscriptable
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 15:46:15] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams None
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 43, in start_operation
+    is_error, json_params = self.check_text()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 142, in check_text
+    params['algo'] = [cparams['params[algo][0]'], cparams['params[algo][1]'], 'DT']
+TypeError: 'NoneType' object is not subscriptable
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 15:46:45] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams None
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 43, in start_operation
+    is_error, json_params = self.check_text()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 142, in check_text
+    params['algo'] = [cparams['params[algo][0]'], cparams['params[algo][1]'], 'DT']
+TypeError: 'NoneType' object is not subscriptable
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 15:50:46] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams None
+ERROR:flask.app:Exception on /getresults [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/routes.py", line 66, in execute
+    _, info = result_controller.start_operation()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 43, in start_operation
+    is_error, json_params = self.check_text()
+  File "/Users/sophatvathana/slash/slash-ml-api/slashmlapi/app/slashml/result_controller.py", line 142, in check_text
+    params['algo'] = [cparams['params[algo][0]'], cparams['params[algo][1]'], 'DT']
+TypeError: 'NoneType' object is not subscriptable
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 15:51:25] "[1m[35mPOST /getresults HTTP/1.1[0m" 500 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': '', 'params[PR][method]': 'doc_freq', 'params[PR][threshold]': '1', 'params[NN][hidden_layer_sizes]': '20,56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': '', 'PR': {'method': 'doc_freq', 'threshold': 1}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (20, 56), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:['hi', 'going', 'how', 'new', 'everyth', 'thing', 'lif', 'day', 'good', 'see', 'nic', 'long', 'tim', 'morn', 'afternoon', 'ev', 'meet', 'pleas', 'ar', 'ok', 'you', 'alright', 'mat', 'howdy', 'sup', 'whazzup', 'hiy', 'hello', 'hey', 'man', 'what', 'it', 'beauty', 'greet', 'goodby', 'lat', 'soon', 'talk', 'got', 'get', 'i', 'must', 'tak', 'easy', 'hav', 'look', 'forward', 'next', 'car', 'night', 'catch', 'peac', 'ta', 'jet', 'hit', 'road', 'head', 'wond', 'gre', 'on', 'ya', 'run', 'split', 'outt', 'farewel', 'bye', 'cya', 'rest', 'thank', 'help', 'much', 'many', 'grat', 'lot', 'bunch', 'real', 'apprecy', 'know', 'say', 'kind', 'best', 'ow', 'rock', 'would', 'without', 'to', 'enough', 'tru', 'troubl', 'etern', 'want', 'word', 'describ', 'acceiv', 'deepest', 'difficult', 'profess', 'situ', 'if', 'writ', 'off', 'busy', 'email', 'let', 'us', 'form', 'express', 'show', 'for', 'exampl', 'may', 'someon', 'anoth', 'company', 'or', 'perhap', 'gratitud', 'work', 'year', 'assist', 'at', 'yo', 'support', 'lik', 'consid', 'com', 'today', 'awesom', 'mad', 'oh', 'thought', 'don', 'thi', 'mean', 'back', 'guid', 'explain', 'stop', 'find', 'dog']
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 15:52:03] "[37mPOST /getresults HTTP/1.1[0m" 200 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': '', 'params[PR][method]': 'doc_freq', 'params[PR][threshold]': '1', 'params[NN][hidden_layer_sizes]': '20,56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': '', 'PR': {'method': 'doc_freq', 'threshold': 1}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (20, 56), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:['hi', 'going', 'how', 'new', 'everyth', 'thing', 'lif', 'day', 'good', 'see', 'nic', 'long', 'tim', 'morn', 'afternoon', 'ev', 'meet', 'pleas', 'ar', 'ok', 'you', 'alright', 'mat', 'howdy', 'sup', 'whazzup', 'hiy', 'hello', 'hey', 'man', 'what', 'it', 'beauty', 'greet', 'goodby', 'lat', 'soon', 'talk', 'got', 'get', 'i', 'must', 'tak', 'easy', 'hav', 'look', 'forward', 'next', 'car', 'night', 'catch', 'peac', 'ta', 'jet', 'hit', 'road', 'head', 'wond', 'gre', 'on', 'ya', 'run', 'split', 'outt', 'farewel', 'bye', 'cya', 'rest', 'thank', 'help', 'much', 'many', 'grat', 'lot', 'bunch', 'real', 'apprecy', 'know', 'say', 'kind', 'best', 'ow', 'rock', 'would', 'without', 'to', 'enough', 'tru', 'troubl', 'etern', 'want', 'word', 'describ', 'acceiv', 'deepest', 'difficult', 'profess', 'situ', 'if', 'writ', 'off', 'busy', 'email', 'let', 'us', 'form', 'express', 'show', 'for', 'exampl', 'may', 'someon', 'anoth', 'company', 'or', 'perhap', 'gratitud', 'work', 'year', 'assist', 'at', 'yo', 'support', 'lik', 'consid', 'com', 'today', 'awesom', 'mad', 'oh', 'thought', 'don', 'thi', 'mean', 'back', 'guid', 'explain', 'stop', 'find', 'dog']
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 15:53:05] "[37mPOST /getresults HTTP/1.1[0m" 200 -
+INFO:root:ServerRun Start ML
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:root:Result controller
+INFO:root:In check text: check_text
+INFO:root:Res controller {}
+INFO:root:Res controller cparams {'params[algo][0]': 'NB', 'params[algo][1]': 'NN', 'params[eval_setting]': '', 'params[PR][method]': 'doc_freq', 'params[PR][threshold]': '1', 'params[NN][hidden_layer_sizes]': '20,56', 'params[NN][learning_rate]': '0.012', 'params[NN][momentum]': '0.5', 'params[NN][random_state]': '0', 'params[NN][max_iter]': '200', 'params[NN][activation]': 'tanh', 'params[DT][criterion]': 'gini', 'params[DT][max_depth]': '30', 'params[DT][min_criterion]': '0.05'}
+INFO:root:Res controller {'algo': ['NB', 'NN', 'DT'], 'eval_setting': '', 'PR': {'method': 'doc_freq', 'threshold': 1}, 'DT': {'criterion': 'gini', 'max_depth': 30, 'min_criterion': 0.05}, 'NN': {'hidden_layer_sizes': (20, 56), 'learning_rate': 0.012, 'momentum': 0.5, 'random_state': 0, 'max_iter': 200, 'activation': 'tanh'}}
+DEBUG:root:['hi', 'going', 'how', 'new', 'everyth', 'thing', 'lif', 'day', 'good', 'see', 'nic', 'long', 'tim', 'morn', 'afternoon', 'ev', 'meet', 'pleas', 'ar', 'ok', 'you', 'alright', 'mat', 'howdy', 'sup', 'whazzup', 'hiy', 'hello', 'hey', 'man', 'what', 'it', 'beauty', 'greet', 'goodby', 'lat', 'soon', 'talk', 'got', 'get', 'i', 'must', 'tak', 'easy', 'hav', 'look', 'forward', 'next', 'car', 'night', 'catch', 'peac', 'ta', 'jet', 'hit', 'road', 'head', 'wond', 'gre', 'on', 'ya', 'run', 'split', 'outt', 'farewel', 'bye', 'cya', 'rest', 'thank', 'help', 'much', 'many', 'grat', 'lot', 'bunch', 'real', 'apprecy', 'know', 'say', 'kind', 'best', 'ow', 'rock', 'would', 'without', 'to', 'enough', 'tru', 'troubl', 'etern', 'want', 'word', 'describ', 'acceiv', 'deepest', 'difficult', 'profess', 'situ', 'if', 'writ', 'off', 'busy', 'email', 'let', 'us', 'form', 'express', 'show', 'for', 'exampl', 'may', 'someon', 'anoth', 'company', 'or', 'perhap', 'gratitud', 'work', 'year', 'assist', 'at', 'yo', 'support', 'lik', 'consid', 'com', 'today', 'awesom', 'mad', 'oh', 'thought', 'don', 'thi', 'mean', 'back', 'guid', 'explain', 'stop', 'find', 'dog']
+INFO:werkzeug:127.0.0.1 - - [02/Aug/2018 15:54:03] "[37mPOST /getresults HTTP/1.1[0m" 200 -
