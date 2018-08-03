@@ -5,3 +5,4 @@ files.txt
 .DS_Store
 .env
 **/data/
+slashmlapi/data
