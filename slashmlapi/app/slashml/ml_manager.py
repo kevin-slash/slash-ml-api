@@ -152,7 +152,6 @@ class MLManager(object):
     # Preprocess: transform text to frequency
     prepro = Preprocessing(**config)
     mat = prepro.loading_single_doc(text, 'doc_freq', config['threshold'])
-    print(mat)
     # Initialize only 3 algorithms at the moment
     ml = MachineLearning(**config)
 
@@ -171,6 +170,7 @@ class MLManager(object):
     # DT
     dt_algo = ml.DecisionTree(criterion='gini', prune='depth', max_depth=30, min_criterion=0.05)
     dt_model = dt_algo.load_model()
+
     #norm_mat = prepro.normalize_dataset(np.array([mat])) # use with decision tree only
     #norm_mat = prepro.normalize_dataset(np.array([mat])) # use with decision tree only
     #dt_prediction = dt_algo.predict(dt_model, norm_mat)

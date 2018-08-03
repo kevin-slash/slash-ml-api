@@ -56,6 +56,7 @@ class PredictController(object):
             try:
                 # Get params from client request
                 params = self.request.form.get('params')
+
                 json_params = json.loads(params)
                 # logging.info('Prediction controller %s' %self.request.form)
                 # logging.info('Prediction controller %s' %params)
