@@ -64,7 +64,7 @@ class MLManager(object):
     # Store config for next use
     config = config
     is_unicode = config.get('is_unicode', None)
-    config['is_unicode'] = 'true' if is_unicode != None else False
+    config['is_unicode'] = True if is_unicode != None else False
     #logfile = '/Users/lion/Documents/py-workspare/slash-ml/logfile.log'
     #logging.basicConfig(filename=logfile, level=logging.DEBUG)
     config['passion'] = "passion"
