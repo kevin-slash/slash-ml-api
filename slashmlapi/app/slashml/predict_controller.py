@@ -37,7 +37,7 @@ class PredictController(object):
             text = json_params['input_text']
             self.kwargs['threshold'] = json_params['threshold']
             is_unicode = json_params.get('is_unicode', None)
-            self.kwargs['is_unicode'] = 'true' if is_unicode != None else False
+            self.kwargs['is_unicode'] = True if is_unicode != None else False
             results = MLManager.classify(self.kwargs, text)
 
             return True, results
